@@ -1,14 +1,12 @@
 #summary A simple example showing how to create an isometric box on the stage.
 #labels Featured,Phase-Implementation,tutorial
 
-= intro =
-
+= tutorial =
 This tutorial will demonstrate how to add an isometric primitive to the display list.
 
 [http://img524.imageshack.us/img524/2527/picture1ad1.png]
 
-= source code =
-
+*source code*
 {{{
 package 
 {
