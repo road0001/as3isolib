@@ -1,7 +1,7 @@
 #summary Learn to use an IsoScene to layout objects in 3D isometric space.
 #labels Featured,Phase-Implementation,tutorial
 
-= Introduction =
+= tutorial =
 
 IsoScene is a container-type node that allows multiple IIsoDisplayObject children to be added.  If the layout is enabled, the IsoScene will depth sort each child according to their 3D isometric coordinates, regardless of the order they were added.
 
