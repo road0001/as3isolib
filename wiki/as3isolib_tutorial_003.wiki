@@ -1,0 +1,13 @@
+#summary Styling an IIsoDisplayObject primitive
+
+= tutorial =
+
+The as3isolib primitive types have various styling attributes available to customize the look and feel.
+
+Those attributes are:
+  * render style - determines if the primitive is rendered 
+  * face line alphas
+  * face line colors
+  * face line thicknesses
+  * face alphas
+  * face colors
