@@ -1,13 +1,15 @@
-#summary Styling an IIsoDisplayObject primitive
+#summary Styling an IIsoPrimitive class
 
 = tutorial =
 
-The as3isolib primitive types have various styling attributes available to customize the look and feel.
+The as3isolib IIsoPrimitive primitive types have various styling attributes available for customization.
 
 Those attributes are:
-  * render style - determines if the primitive is rendered 
-  * face line alphas
-  * face line colors
-  * face line thicknesses
-  * face alphas
-  * face colors
+  * render style - determines if the primitive is rendered as a shaded, solid or wireframe model.
+  * face line alphas - polygon edge alphas.
+  * face line colors - polygon edge colors
+  * face line thicknesses - polygon edge thicknesses
+  * face alphas - polygon fill alphas
+  * face colors - polygon fill colors
+
+By default all IIsoPrimitives are rendered as RenderStyleType.SHADED meaning that individual faces are shaded to different colors to add to the perception of depth.  RenderStyleType.SOLID will draw all faces with color #FFFFFF.  RenderStyleType.WIREFRAME renders all faces as transparent.  Rendered as transparent allows mouse events to still be triggered.
