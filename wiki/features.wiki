@@ -8,7 +8,8 @@
   * integrates well with a variety of tween engines
   * standard 3D isometric positional sorting
 
-= features currently in development (items in bold are top-priorities) =
+= features currently in development =
+(items in bold are top-priorities)
   * *as3isolib.display.IsoMovieClip* - will allow users to utilize their raster-based content
   * xml scene data parser - for easy scene creation
   * world editor tool for easy xml-based scene creation (will not be a part of the as3isolib rather it will reside in its own project)
