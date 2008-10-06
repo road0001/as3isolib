@@ -7,7 +7,7 @@ The IsoSprite class is the base class used to display non-drawing API created vi
 
 [http://img384.imageshack.us/img384/3932/picture1nb2.png]
 
-In this example I have created a tree from two images.  The first image is the tree trunk, the other is the leaves of the tree.  In order to provide realistic isometric depth sorting, each visual asset is presented into its own 3D isometric bounding box.  This allows objects without elevation (object.z > 0) to be able to appear under the leaves of the tree if need be.  Obviously this isn't necessary for visual assets that have similar proportions.  Assume for the moment a tall, slender tree whose leaves do not extend too far beyond the extent of the trunk.  In this case a developer could composite both the trunk and leaves visual assets into one IsoSprite.
+In this example I have created a tree from two images.  The first image is the tree trunk, the other is the leaves of the tree.  In order to provide realistic isometric depth sorting, each visual asset is presented into its own 3D isometric bounding box.  This allows objects without elevation (object.z = 0) to be able to appear under the leaves of the tree if need be.  Obviously this isn't necessary for visual assets that have similar proportions.  Assume for the moment a tall, slender tree whose leaves do not extend too far beyond the extent of the trunk.  In this case a developer could composite both the trunk and leaves visual assets into one IsoSprite.
 
 *code*
 {{{
