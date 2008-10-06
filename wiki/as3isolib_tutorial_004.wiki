@@ -80,3 +80,15 @@ package
 }
 
 }}}
+
+In order to render visual assets correctly so that appear in the expected 3D isometric coordinate space, a bit of asset preparation is necessary.  The example assets were prepared in the Flash IDE and then exported for AS3 along with the SWF.
+
+The tree trunk asset was assigned the following properties - width:25, length:25, height:65.  Make note of the origin point of the MovieClip within the Flash IDE.
+
+[http://img55.imageshack.us/img55/4310/picture2hz1.png]
+
+The tree leaves asset was assigned the following properties - width:125, length:125, height:100.  Again making note of the origin point of the MovieClip within the Flash IDE.
+
+[http://img55.imageshack.us/img55/8367/picture3iw1.png]
+
+In order to eliminate the need to use offset calculations, all IIsoDisplayObjects present their origin in the same fashion.  If you were to imagine any 3D volume in isometric space, assuming that any visual assets does not extend into any of the negative octants of space, the origin would reside at the top corner (in screen orientation) of the bottom face.
