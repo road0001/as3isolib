@@ -1,8 +1,9 @@
-#summary Using ISceneRenderers with IIsoScenes
+#summary Using ISceneRenderers with IsoScenes
+#labels Featured,Phase-Implementation,tutorial
 
 = tutorial =
 
-Using ISceneRenderers allows a user to add custom styles and layout arrangements to an IIsoScene.  Currently there are two types of ISceneRenderers, those that handle layout of a scene's child objects and those that help style the overall scene and/or children (such as applying shadows and other effects).  The use of an ISceneRenderer allows developers to create their own custom layouts and styling beyond the provided classes.
+Using ISceneRenderers allows a user to add custom styles and layout arrangements to an IsoScene.  Currently there are two types of ISceneRenderers, those that handle layout of a scene's child objects and those that help style the overall scene and/or children (such as applying shadows and other effects).  The use of an ISceneRenderer allows developers to create their own custom layouts and styling beyond the provided classes.
 
 The means for implementing ISceneRenderers on a given scene utilizes a [http://en.wikipedia.org/wiki/Factory_method_pattern factory method] (which was borrowed from the Flex SDK's IFactory and ClassFactory).
 
@@ -37,7 +38,7 @@ package
 			
 			var box:IsoBox = new IsoBox();
 			box.setSize(25, 25, 25);
-			box.moveBy(20, 20, 15);
+			box.moveBy(20, 20, 15); //feature request added
 			scene.addChild(box);
 			
 			var factory:IFactory = new ClassFactory(DefaultShadowRenderer);
@@ -56,3 +57,16 @@ package
 	}
 }
 }}}
+
+[http://img296.imageshack.us/img296/334/picture3fn5.png]
+
+If for some chance you want a darker shadow of a different color you would simply do the following:
+
+*code*
+{{{
+var factory:IFactory = new ClassFactory(DefaultShadowRenderer);
+factory.properties = {shadowColor:0xFF0000, shadowAlpha:1.0, drawAll:false};
+scene.styleRenderers = [factory];
+}}}
+
+IsoScenes can only have one ISceneRenderer set as the layoutRenderer however they can have any number of styleRenderers.  The more styleRenderers a scene has the more CPU intensive each render pass becomes.  StyleRenderers are applied in the order they were added.
