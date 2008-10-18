@@ -5,11 +5,11 @@
 ----
 *2008.10.18*
 
-  * Added tutorial #7 - Simple interactive example (w/ example SWF)
+  * Added tutorial #7 - [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_007 Simple interactive example (w/ example SWF)]
 
 *2008.10.17*
 
-  * Added tutorial #6 - ISceneRenderers
+  * Added tutorial #6 - [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_006 ISceneRenderers]
   * Added moveBy to IIsoDisplayObject (in SVN, will manifest in next release)
   * Added ISceneRenderer implementation to IsoScene
 
