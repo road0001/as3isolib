@@ -1,12 +1,15 @@
 #summary Quick example showing how to animate a scene
-
-= tutorial =
+#labels Featured,Phase-Implementation,tutorial
 
 *prerequisites*
 
 This example makes use of Grant Skinner's [http://gskinner.com/libraries/gtween/ GTween].  You can download the source code here - [http://gskinner.com/libraries/gtween/GTween_beta2.zip link].
 
+= tutorial =
+
 Most developers will seek some level of interactivity with the as3isolib and the content created with it.  Here is a quick example on how to make a simple interactive scene using a grid and a box.  By clicking on the any of the cells in the grid, the box is tweened to that location.
+
+[http://megaswf.com/view/d19090994fa8b4b3bd760ffa059b83f4.html example swf]
 
 *code*
 {{{
