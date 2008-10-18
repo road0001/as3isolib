@@ -2,4 +2,45 @@
 #labels Featured
 
 = Recent Updates =
+----
+*2008.10.18*
 
+  * Added tutorial #7 - Simple interactive example (w/ example SWF)
+
+*2008.10.17*
+
+  * Added tutorial #6 - ISceneRenderers
+  * Added moveBy to IIsoDisplayObject (in SVN, will manifest in next release)
+  * Added ISceneRenderer implementation to IsoScene
+
+*2008.10.14*
+
+  * Added new build including optimization for IsoScene regarding scene renderers
+  * Added two new classes modeled directly from mx.core.ClassFactory and mx.core.IFactory
+  * Docs updated to reflect new build
+
+*2008.10.13*
+
+  * Added [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_005 IsoView tutorial]
+
+*2008.10.10*
+
+  * Created [http://groups.google.com/group/as3isolib-users-group as3isolib users group] page
+
+*2008.10.06*
+
+  * Added [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_004 IsoSprite tutorial]
+  * Added [http://as3isolib.googlecode.com/svn/trunk/asdoc/as3isolib/display/IsoSprite.html IsoSprite] class
+
+*2008.10.01*
+
+  * Added two tutorials.
+  * Added [http://code.google.com/p/as3isolib/downloads/list as3isolib alpha release] including source, swc, and docs.
+
+*2008.09.30* 
+
+  * Added [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_001 as3isolib tutorial #1]: A simple example showing how to create an isometric box on the stage.
+
+*2008.09.29*
+
+  * Added [http://as3isolib.googlecode.com/svn/trunk/asdoc/index.html asdocs]
