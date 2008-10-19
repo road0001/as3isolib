@@ -4,7 +4,6 @@
 = current features =
   * simple scene creation
   * 3 primitive types
-  * Sprite type class for loading externally created content for placement in 3D isometric space
   * base class for displaying user-created content
   * plenty of styling option on vector based primitives
   * integrates well with a variety of tween engines
