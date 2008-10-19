@@ -1,5 +1,5 @@
 #summary Using ISceneRenderers with IsoScenes
-#labels Featured,Phase-Implementation,tutorial
+#labels Phase-Implementation,tutorial
 
 = tutorial =
 
