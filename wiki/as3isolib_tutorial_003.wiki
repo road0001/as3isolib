@@ -1,5 +1,5 @@
 #summary Styling an IIsoPrimitive class
-#labels Featured,Phase-Implementation,tutorial
+#labels Phase-Implementation,tutorial
 
 #labels Featured,Phase-Implementation,tutorial
 
