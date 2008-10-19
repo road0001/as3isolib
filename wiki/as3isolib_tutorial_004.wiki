@@ -1,5 +1,5 @@
 #summary Introducing the IsoSprite class
-#labels Featured,Phase-Implementation,tutorial
+#labels Phase-Implementation,tutorial
 
 = tutorial =
 
