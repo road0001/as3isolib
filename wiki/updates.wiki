@@ -1,6 +1,12 @@
 #summary recent as3isolib updates
 #labels Featured
 
+*2008.11.03*
+
+  * New build uploaded ([http://as3isolib.googlecode.com/files/as3isolib_200811031726.zip 2008.11.03 build]) with improvements in display list logic.
+  * added IViewRenderer
+  * added DefaultViewRenderer
+
 *2008.10.30*
 
   * Work has been focused on performance optimization.  You can read more about that here - [http://groups.google.com/group/as3isolib-users-group/browse_thread/thread/fa9494568f0c8587 link]
