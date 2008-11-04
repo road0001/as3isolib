@@ -4,6 +4,7 @@
 *2008.11.04*
 
   * Added tutorial #8 - [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_008 as3isolib flex integration]
+  * Added tutorial #9 - [http://code.google.com/p/as3isolib/wiki/as3isolib_tutorial_009 using IViewRenderers]
 
 *2008.11.03*
 
