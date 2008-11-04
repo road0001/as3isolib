@@ -64,3 +64,5 @@ view.scene = scene;
 
 isoHostContainer.addChild(view);
 }}}
+
+Thanks goes to Bryan Wills who provided the code samples.
