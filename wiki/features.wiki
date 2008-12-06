@@ -19,3 +19,7 @@
   * as3isolib-specific collision detection
   * optimization geared towards caching both static and animated sprite assets
   * asset loader - to be used in conjunction with the world editor tool
+
+= considerations =
+  * blitting technique
+  * pathfinding tools
