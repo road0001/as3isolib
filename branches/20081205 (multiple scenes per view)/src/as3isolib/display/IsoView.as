@@ -70,7 +70,7 @@ package as3isolib.display
 		/**
 		 * @private
 		 */
-		protected var currentScreenPt:Pt;
+		protected var currentScreenPt:Pt = new Pt();
 		
 		/**
 		 * @inheritDoc
@@ -164,7 +164,7 @@ package as3isolib.display
 		//	VALIDATION
 		///////////////////////////////////////////////////////////////////////////////
 		
-		public var renderSceneOnValidation:Boolean = false;
+		public var renderScenesOnValidation:Boolean = false;
 		
 		/**
 		 * @inheritDoc
@@ -220,7 +220,7 @@ package as3isolib.display
 			
 			currentScreenPt = targetScreenPt.clone() as Pt;
 			
-			if (viewRenderers && mainIsoScene)
+			if (viewRenderers && numScenes > 0)
 			{
 				var viewRenderer:IViewRenderer;
 				var factory:IFactory;
@@ -230,8 +230,12 @@ package as3isolib.display
 					viewRenderer.renderView(this);
 				}
 				
-				if (renderSceneOnValidation)
-					mainIsoScene.render();
+				if (renderScenesOnValidation)
+				{
+					var scene:IIsoScene;
+					for each (scene in scenesArray)
+						scene.render();
+				}
 			}
 		}
 		
@@ -297,7 +301,7 @@ package as3isolib.display
 		///////////////////////////////////////////////////////////////////////////////
 		
 		/**
-		 * The current zoom factor applied to the child scene objects.
+		 * @inheritDoc
 		 */
 		public function get currentZoom ():Number
 		{
@@ -367,39 +371,125 @@ package as3isolib.display
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////
-		//	SCENE
+		//	SCENE METHODS
 		///////////////////////////////////////////////////////////////////////////////
-		
-		private var mainIsoScene:IIsoScene;
 		
 		/**
 		 * @private
 		 */
-		public function get scene ():IIsoScene
+		protected var scenesArray:Array = [];
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function get scenes ():Array
 		{
-			return mainIsoScene;
+			return scenesArray;
 		}
 		
 		/**
 		 * @inheritDoc
 		 */
-		public function set scene (value:IIsoScene):void
+		public function get numScenes ():uint
 		{
-			if (mainIsoScene != value)
+			return scenesArray.length;
+		}
+		
+		public function addScene (scene:IIsoScene):void
+		{
+			addSceneAt(scene, scenesArray.length);
+		}
+		
+		public function addSceneAt (scene:IIsoScene, index:int):void
+		{
+			if (!containsScene(scene))
 			{
-				if (mainIsoScene)
-					mainIsoScene.hostContainer = null;
+				scenesArray.splice(index, 0, scene);
 				
-				mainIsoScene = value;
-				if (mainIsoScene)
-				{
-					var oldZoom:Number = currentZoom;
-					
-					mainIsoScene.hostContainer = _sceneContainer;
-					reset();
-					zoom(oldZoom);
-				}
+				scene.hostContainer = _sceneContainer;
+				if (_sceneContainer.contains(scene.hostContainer) && _sceneContainer.numChildren > 1)
+					_sceneContainer.setChildIndex(scene.hostContainer, index);
 			}
+			
+			else
+				throw new Error("IsoView instance already contains parameter scene");
+		}
+		
+		public function containsScene (scene:IIsoScene):Boolean
+		{
+			var childScene:IIsoScene;
+			for each (childScene in scenesArray)
+			{
+				if (scene == childScene)
+					return true;
+			}
+			
+			return false;
+		}
+		
+		/* public function getSceneAt (index:int):IIsoScene
+		{
+			return IIsoScene(scenesArray[index]);
+		} */
+		
+		/* public function getSceneById (id:String):IIsoScene
+		{
+			var childScene:IIsoScene
+			for each (childScene in scenesArray)
+			{
+				if (childScene.id == id)
+					return childScene;
+			}
+			
+			return null;
+		} */
+		
+		/* public function getSceneIndex (scene:IIsoScene):int
+		{
+			var i:uint;
+			var m:uint = scenesArray.length;
+			while (i < m)
+			{
+				if (scene == scenesArray[i])
+					return i;
+				
+				i++;
+			}
+			
+			return -1;
+		} */
+		
+		/* public function setSceneIndex (scene:IIsoScene, index:int):void
+		{
+			
+		} */
+		
+		public function removeScene (scene:IIsoScene):IIsoScene
+		{
+			if (containsScene(scene))
+			{
+				var i:int = scenesArray.indexOf(scene);
+				scenesArray.splice(i, 1);
+				
+				return scene;				
+			}
+			
+			else
+				return null;
+		}
+		
+		/* public function removeSceneAt (index:int):IIsoScene
+		{
+			
+		} */
+		
+		public function removeAllScenes ():void
+		{
+			var scene:IIsoScene;
+			for each (scene in scenesArray)
+				scene.hostContainer = null;
+			
+			scenesArray = [];
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////

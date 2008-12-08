@@ -108,6 +108,12 @@ package as3isolib.display.primitive
 		 */
 		function set styleType (value:String):void;
 		
+		function get fills ():Array;
+		function set fills (value:Array):void;
+		
+		function get edges ():Array;
+		function set edges (value:Array):void;
+		
 		//////////////////////////////////////////////////////////////////
 		//	INVALIDATION
 		//////////////////////////////////////////////////////////////////

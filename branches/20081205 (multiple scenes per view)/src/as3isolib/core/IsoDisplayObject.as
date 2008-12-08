@@ -597,7 +597,7 @@ package as3isolib.core
 		/**
 		 * @inheritDoc
 		 */
-		public function clone ():IIsoDisplayObject
+		public function clone ():*
 		{
 			var CloneClass:Class = getDefinitionByName(getQualifiedClassName(this)) as Class;
 			
