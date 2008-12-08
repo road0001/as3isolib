@@ -14,6 +14,7 @@
 = features currently in development =
   * xml scene data parser - for easy scene creation
   * world editor tool for easy xml-based scene creation (will not be a part of the as3isolib rather it will reside in its own project)
+  * Flash Player 10 implementation
 
 = future features =
   * advanced shadow renderers
