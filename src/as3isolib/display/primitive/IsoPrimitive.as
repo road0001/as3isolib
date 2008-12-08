@@ -29,12 +29,13 @@ SOFTWARE.
 */
 package as3isolib.display.primitive
 {
-	import as3isolib.bounds.PrimitiveBounds;
 	import as3isolib.core.IIsoDisplayObject;
 	import as3isolib.core.IsoDisplayObject;
 	import as3isolib.core.as3isolib_internal;
 	import as3isolib.enum.RenderStyleType;
 	import as3isolib.events.IsoEvent;
+	import as3isolib.graphics.SolidColorFill;
+	import as3isolib.graphics.Stroke;
 	
 	use namespace as3isolib_internal;
 	
@@ -222,6 +223,64 @@ package as3isolib.display.primitive
 			}
 		}
 		
+		//////////////////////////////
+		//	TESTING
+		//////////////////////////////
+		
+			private var fillsArray:Array = 
+				[
+					new SolidColorFill(0xFFFFFF, 1),
+					new SolidColorFill(0xFFFFFF, 1),
+					new SolidColorFill(0xFFFFFF, 1),
+					new SolidColorFill(0xFFFFFF, 1),
+					new SolidColorFill(0xCCCCCC, 1),
+					new SolidColorFill(0xCCCCCC, 1)
+				];
+			
+			public function get fills ():Array
+			{
+				return fillsArray;
+			}
+			
+			public function set fills (value:Array):void
+			{
+				if (fillsArray != value)
+				{
+					fillsArray = value;
+					invalidateStyles();
+					
+					if (autoUpdate)
+						render();
+				}
+			}
+			
+			private var edgesArray:Array =
+				[
+					new Stroke(0, 0x000000),
+					new Stroke(0, 0x000000),
+					new Stroke(0, 0x000000),
+					new Stroke(0, 0x000000),
+					new Stroke(0, 0x000000),
+					new Stroke(0, 0x000000)
+				];
+			
+			public function get edges ():Array
+			{
+				return edgesArray;
+			}
+			
+			public function set edges (value:Array):void
+			{
+				if (edgesArray != value)
+				{
+					edgesArray = value;
+					invalidateStyles();
+					
+					if (autoUpdate)
+						render();
+				}
+			}
+		
 		/////////////////////////////////////////////////////////
 		//	RENDER
 		/////////////////////////////////////////////////////////
@@ -312,9 +371,12 @@ package as3isolib.display.primitive
 		/**
 		 * @inheritDoc
 		 */
-		override public function clone ():IIsoDisplayObject
+		override public function clone ():*
 		{
 			var cloneInstance:IIsoPrimitive = super.clone() as IIsoPrimitive;
+			cloneInstance.fills = fillsArray;
+			cloneInstance.edges = edgesArray
+			
 			cloneInstance.styleType = styleType;
 			cloneInstance.lineAlphas = lineAlphasArray;
 			cloneInstance.lineColors = lineColorArray;

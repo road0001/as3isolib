@@ -209,6 +209,6 @@ package as3isolib.core
 		 * 
 		 * @return IIsoDisplayObject The clone of the original.
 		 */
-		function clone ():IIsoDisplayObject;
+		function clone ():*;
 	}
 }

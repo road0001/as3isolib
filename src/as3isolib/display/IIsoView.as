@@ -42,14 +42,14 @@ package as3isolib.display
 	public interface IIsoView
 	{
 		/**
-		 * @private
+		 * An array of all child scenes.
 		 */
-		function get scene ():IIsoScene;
+		function get scenes ():Array;
 		
 		/**
-		 * The child scene object that this IsoView wraps.
+		 * The number of scenes.
 		 */
-		function set scene (value:IIsoScene):void;
+		function get numScenes ():uint;
 		
 		/**
 		 * This point is the coordinate position visually located at the center of the IIsoView relative to the scenes' host containers.
@@ -106,6 +106,11 @@ package as3isolib.display
 		 * @see #currentPt
 		 */
 		function pan (px:Number, py:Number):void;
+		
+		/**
+		 * The current zoom factor applied to the child scene objects.
+		 */
+		function get currentZoom ():Number
 		
 		/**
 		 * Zooms the child scene objects by a given amount.

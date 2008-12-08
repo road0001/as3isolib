@@ -34,6 +34,7 @@ package as3isolib.utils
 	import as3isolib.geom.Pt;
 	
 	import flash.display.Graphics;
+	import flash.geom.Matrix;
 	
 	/**
 	 * IsoDrawingUtil provides some convenience methods for drawing shapes in 3D isometric space.
@@ -190,6 +191,52 @@ package as3isolib.utils
 			g.lineTo(pt1.x, pt1.y);
 			g.lineTo(pt2.x, pt2.y);
 			g.lineTo(pt0.x, pt0.y);
+		}
+		
+		/**
+		 * Given a particular isometric orientation this method returns a matrix needed to project(skew) and image onto that plane.
+		 * 
+		 * @param orientation The isometric planar orientation.
+		 * @return Matrix The matrix associated with the provided isometric orientation.
+		 * 
+		 * @see as3isolib.enum.IsoOrientation
+		 */
+		static public function getIsoMatrix (orientation:String):Matrix
+		{
+			var m:Matrix = new Matrix();
+			
+			switch (orientation)
+			{
+				case IsoOrientation.XY:
+				{
+					var m2:Matrix = new Matrix();
+					m2.scale(1, 0.5);
+					
+					m.rotate(Math.PI / 4);
+					m.concat(m2);
+					
+					break;
+				}
+				
+				case IsoOrientation.XZ:
+				{
+					m.b = Math.atan(0.5);
+					break;
+				}
+				
+				case IsoOrientation.YZ:
+				{
+					m.b = Math.atan(-0.5);
+					break;
+				}
+				
+				default:
+				{
+					//do nothing
+				}
+			}
+			
+			return m;
 		}
 	}
 }

@@ -34,7 +34,7 @@ package as3isolib.display.renderers
 	import as3isolib.core.as3isolib_internal;
 	import as3isolib.display.scene.IIsoScene;
 	
-	import flash.events.EventDispatcher;
+	import flash.utils.getTimer;
 	
 	use namespace as3isolib_internal;
 	
@@ -52,6 +52,7 @@ package as3isolib.display.renderers
 		 */
 		public function renderScene (scene:IIsoScene):void
 		{
+			var startTime:uint = getTimer();
 			var sortedChildren:Array = scene.displayListChildren.slice(); //make a copy of the children
 			sortedChildren.sortOn(["distance", "screenX", "screenY"], Array.NUMERIC);
 			sortedChildren.sort(isoDepthSort); //perform a secondary sort for any hittests
@@ -77,8 +78,6 @@ package as3isolib.display.renderers
 		{
 			var boundsA:IBounds;
 			var boundsB:IBounds;
-			
-			//trace(childA.id, childB.id);
 			
 			if (childA.container.hitTestObject(childB.container))
 			{

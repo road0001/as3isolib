@@ -159,6 +159,9 @@ package as3isolib.display.primitive
 			{
 				sq = IsoRectangle(getChildAt(i));
 				
+				sq.edges = [edges[c]];
+				sq.fills = [fills[c]];
+				
 				//styling
 				sq.lineAlphas = [lineAlphas[c]];
 				sq.lineColors = [lineColors[c]];
