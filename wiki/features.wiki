@@ -12,6 +12,8 @@
   * performance caching of static and animated sprite assets
 
 = features currently in development =
+  * blitting technique
+  * hex grid
   * xml scene data parser - for easy scene creation
   * world editor tool for easy xml-based scene creation (will not be a part of the as3isolib rather it will reside in its own project)
   * Flash Player 10 implementation
@@ -22,5 +24,4 @@
   * asset loader - to be used in conjunction with the world editor tool
 
 = considerations =
-  * blitting technique
   * pathfinding tools
