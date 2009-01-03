@@ -1,0 +1,17 @@
+#summary An in-depth look at how the as3isolib render phase works
+#labels Phase-Implementation
+
+The as3isolib is developed to make use of the common invalidation/validation process.  Property changes and events flag an object for invalidation to be validated later.  This process conserves rendering time as consecutive property changes do not necessarily trigger validation of the object.  As3isolib's render phase is essentially its validation process.
+
+By default, IsoViews are rendered separately from their scenes in order to reduce the cost of stacked rendering phases.
+
+IsoView.render()
+  * validatePosition() - _adjusts the internal display list for the view's contents based on a new position_
+  * viewRenderers - _iterate through the viewRenderers array and execute IViewRenderer.renderView()_
+  * scenes - _if rendering recursively, iterate through the scenes array and execute IIsoScene.render()_
+
+IsoScene.render()
+  * children - _if recursively rendering the scene, iterate through each child and call child.render()_
+  * layoutRenderer - _arrange child objects based on 3D isometric position_
+  * styleRenderers - _iterate through the styleRenderers array and execute ISceneRenderer.renderScene()_
+  * sceneRendered() - _performs any last minute cleanup before exiting the rendering phase_
