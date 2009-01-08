@@ -434,7 +434,7 @@ package eDpLib.events
 		}	
 	}
 }
-
+/* 
 class ListenerHash
 {
 	public var listeners:Array = [];
@@ -474,4 +474,4 @@ class ListenerHash
 		
 		return false;
 	}
-}
+} */
