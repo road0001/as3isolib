@@ -64,11 +64,6 @@ package as3isolib.geom
 				transformationObj = new DefaultIsometricTransformation();
 		}
 		
-		static public function get theta ():Number
-		{
-			return transformationObj.theta;
-		}
-		
 		/////////////////////////////////////////////////////////////////////
 		//	TRANSFORMATION METHODS
 		/////////////////////////////////////////////////////////////////////

@@ -33,8 +33,6 @@ package as3isolib.geom.transformations
 	
 	public interface IAxonometricTransformation
 	{
-		function get theta ():Number;
-		
 		function screenToSpace (screenPt:Pt):Pt;
 		
 		function spaceToScreen (spacePt:Pt):Pt;

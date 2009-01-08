@@ -34,12 +34,15 @@ package as3isolib.geom.transformations
 	public class DefaultIsometricTransformation implements IAxonometricTransformation
 	{
 		/**
-		 * @inheritDoc
+		 * Constructor
 		 */
-		public function get theta ():Number
+		public function DefaultIsometricTransformation (projectValuesToAxonometricAxes:Boolean = false):void
 		{
-			return Math.atan(0.5);
+			bAxonometricAxesProjection = projectValuesToAxonometricAxes;
 		}
+		
+		private var bAxonometricAxesProjection:Boolean;
+		private var theta:Number = Math.atan(0.5);
 		
 		/**
 		 * @inheritDoc
@@ -50,6 +53,12 @@ package as3isolib.geom.transformations
 			var y:Number = screenPt.y - screenPt.x / 2 + screenPt.z;
 			var x:Number = screenPt.x / 2 + screenPt.y + screenPt.z;
 			
+			if (bAxonometricAxesProjection)
+			{
+				x = x / Math.cos(theta);
+				y = y / Math.cos(theta);
+			}
+			
 			return new Pt(x, y, z);
 		}
 		
@@ -58,6 +67,12 @@ package as3isolib.geom.transformations
 		 */
 		public function spaceToScreen (spacePt:Pt):Pt
 		{
+			if (bAxonometricAxesProjection)
+			{
+				spacePt.x = spacePt.x * Math.cos(theta);
+				spacePt.y = spacePt.y * Math.cos(theta);
+			}
+			
 			var z:Number = spacePt.z;
 			var y:Number = (spacePt.x + spacePt.y) / 2 - spacePt.z;
 			var x:Number = spacePt.x - spacePt.y;
