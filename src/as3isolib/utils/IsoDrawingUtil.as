@@ -82,7 +82,7 @@ package as3isolib.utils
 		 */
 		static public function drawIsoRectangle (g:Graphics, originPt:Pt, width:Number, length:Number, plane:String = "xy"):void
 		{
-			var pt0:Pt = IsoMath.isoToScreen(originPt, true);
+			var pt0:Pt = IsoMath.isoToScreen(new Pt(originPt.x, originPt.y, originPt.z));
 			switch (plane)
 			{
 				case IsoOrientation.XZ:
