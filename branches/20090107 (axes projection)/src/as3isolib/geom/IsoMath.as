@@ -64,6 +64,11 @@ package as3isolib.geom
 				transformationObj = new DefaultIsometricTransformation();
 		}
 		
+		static public function get theta ():Number
+		{
+			return transformationObj.theta;
+		}
+		
 		/////////////////////////////////////////////////////////////////////
 		//	TRANSFORMATION METHODS
 		/////////////////////////////////////////////////////////////////////
@@ -75,21 +80,15 @@ package as3isolib.geom
 		 * @param createNew Flag indicating whether to affect the provided pt or to return a converted copy.
 		 * @return pt A pt in 3D isometric space.
 		 */
-		static public function screenToIso (screenPt:Pt, createNew:Boolean = false):Pt
+		static public function screenToIso (screenPt:Pt):Pt
 		{
 			var isoPt:Pt = transformationObject.screenToSpace(screenPt);
 			
-			if (createNew)
-				return isoPt;
-			
-			else
-			{
-				screenPt.x = isoPt.x;
-				screenPt.y = isoPt.y;
-				screenPt.z = isoPt.z;
+			screenPt.x = isoPt.x;
+			screenPt.y = isoPt.y;
+			screenPt.z = isoPt.z;
 				
-				return screenPt;
-			}
+			return screenPt;
 		}
 		
 		/**
@@ -99,21 +98,15 @@ package as3isolib.geom
 		 * @param createNew Flag indicating whether to affect the provided pt or to return a converted copy.
 		 * @return pt A pt in cartesian coordinates.
 		 */
-		static public function isoToScreen (isoPt:Pt, createNew:Boolean = false):Pt
+		static public function isoToScreen (isoPt:Pt):Pt
 		{
 			var screenPt:Pt = transformationObject.spaceToScreen(isoPt);
 			
-			if (createNew)
-				return screenPt;
-			
-			else
-			{
-				isoPt.x = screenPt.x;
-				isoPt.y = screenPt.y;
-				isoPt.z = screenPt.z;
+			isoPt.x = screenPt.x;
+			isoPt.y = screenPt.y;
+			isoPt.z = screenPt.z;
 				
-				return isoPt;
-			}
+			return isoPt;
 		}
 	}
 }
