@@ -3,15 +3,14 @@ package
 	import as3isolib.core.ClassFactory;
 	import as3isolib.display.IsoView;
 	import as3isolib.display.primitive.IsoBox;
-	import as3isolib.display.renderers.DefaultShadowRenderer;
 	import as3isolib.display.renderers.DefaultViewRenderer;
-	import as3isolib.display.renderers.SceneBlittingRenderer;
-	import as3isolib.display.renderers.ViewBoundsRenderer;
 	import as3isolib.display.scene.IsoGrid;
 	import as3isolib.display.scene.IsoScene;
 	import as3isolib.enum.IsoOrientation;
 	import as3isolib.geom.IsoMath;
 	import as3isolib.geom.Pt;
+	import as3isolib.geom.transformations.DefaultIsometricTransformation;
+	import as3isolib.geom.transformations.IsometricTransformation;
 	import as3isolib.graphics.BitmapFill;
 	import as3isolib.graphics.SolidColorFill;
 	
@@ -65,8 +64,12 @@ package
 			
 			IEventDispatcher(evt.target).removeEventListener(Event.COMPLETE, loader_completeHandler);
 			
+			IsoMath.transformationObject = new DefaultIsometricTransformation();
+			IsoMath.transformationObject = new IsometricTransformation();
+			
 			//scene
 			scene = new IsoScene();
+			//scene.layoutEnabled = false;
 			
 			g = new IsoGrid();
 			g.id = "grid";
@@ -79,7 +82,7 @@ package
 			
 			var f0:BitmapFill = new BitmapFill(l, IsoOrientation.XY);
 			var f1:BitmapFill = new BitmapFill(l, IsoOrientation.YZ);
-			var f2:BitmapFill = new BitmapFill(l, IsoOrientation.XZ);
+			var f2:BitmapFill = new BitmapFill(l, IsoOrientation.XZ);  
 			
 			var alphaFill:SolidColorFill = new SolidColorFill(0xFFFFFF, 0.25);
 			
@@ -88,18 +91,14 @@ package
 			box.id = "mover";
 			//box.z = 100;
 			//box.strokes = [new Stroke(5, 0xFFFFFF)];
-			box.fills = [f0, f1, f2];
-			box.setSize(100, 100, 100);
+			//box.fills = [f0, f1, f2];
+			//box.setSize(50, 100, 75);
 			//box.addEventListener(MouseEvent.ROLL_OVER, function (e:Event):void { box.container.filters = [new GlowFilter(0xFFFFFF, 0.5, 15, 15,10)]; });
 			//box.addEventListener(MouseEvent.ROLL_OUT, function (e:Event):void { box.container.filters = []; });
 			
 			scene.addChild(box);
 			
-			box = box.clone();
-			box.setSize(100, 100, 200);
-			box.moveTo(200, 0, 0);
-			scene.addChild(box);
-			/* var randomBox:IsoBox;
+			var randomBox:IsoBox;
 			var i:uint;
 			while (i < numObj)
 			{
@@ -120,11 +119,11 @@ package
 				scene.addChild(randomBox);
 				
 				i++;
-			} */
+			}
 			
 			view = new IsoView();
 			view.clipContent = false;
-			view.viewRenderers = [new ClassFactory(DefaultViewRenderer), new ClassFactory(ViewBoundsRenderer)];
+			view.viewRenderers = [new ClassFactory(DefaultViewRenderer)];//, new ClassFactory(ViewBoundsRenderer)];
 			view.x = 100
 			view.y = 50;
 			view.setSize(800, 250);
@@ -134,13 +133,6 @@ package
 			bitmap.x = 100;
 			bitmap.y = 50;
 			addChild(bitmap);
-			
-			var factory:ClassFactory = new ClassFactory(SceneBlittingRenderer);
-			factory.properties = {};
-			factory.properties.target = bitmap;
-			factory.properties.view = view;
-			
-			var factory2:ClassFactory = new ClassFactory(DefaultShadowRenderer);
 			
 			//scene.layoutRenderer = factory;
 			//scene.styleRenderers = [factory2];
@@ -177,15 +169,15 @@ package
 			
 			IsoMath.screenToIso(pt);
 			
-			pt.x = Math.floor(pt.x / g.cellSize) * g.cellSize;
-			pt.y = Math.floor(pt.y / g.cellSize) * g.cellSize;
 			
+			pt.x = Math.floor(pt.x / g.cellSize) * g.cellSize;
+			pt.y = Math.floor(pt.y / g.cellSize) * g.cellSize;			
 			/* var randomBox:IsoBox = new IsoBox();
 			randomBox.setSize(25, 25, Math.max(25, Math.random() * 100))
 			randomBox.moveTo(pt.x, pt.y, 0);
 			scene.addChild(randomBox); */
 			
-			vtPt = IsoMath.isoToScreen(pt, true);
+			vtPt = IsoMath.isoToScreen(new Pt(pt.x, pt.y, pt.z));
 			
 			if (vt)
 				vt.pause();
