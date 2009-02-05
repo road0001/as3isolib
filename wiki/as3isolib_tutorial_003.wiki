@@ -3,6 +3,8 @@
 
 #labels Featured,Phase-Implementation,tutorial
 
+===TUTORIAL BEING UPDATED TO REFLECT BETA API===
+
 = tutorial =
 
 The as3isolib IIsoPrimitive primitive types have various styling attributes available for customization.
