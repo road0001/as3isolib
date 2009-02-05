@@ -3,7 +3,9 @@
 
 #labels Featured,Phase-Implementation,tutorial
 
-===TUTORIAL BEING UPDATED TO REFLECT BETA API===
+=TUTORIAL BEING UPDATED TO REFLECT BETA API=
+
+---
 
 = tutorial =
 
