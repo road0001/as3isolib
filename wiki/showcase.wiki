@@ -1,5 +1,6 @@
 #summary Showcase of projects using the as3isolib
 
 ===beta release demo screenshots (in development)===
+This is a screenshot of a small demo game currently in development to showcase some of the features of the as3isolib.  It will feature variable height terrain, basic pathfinding, a flare-based GUI and some advanced visual effects utilizing Flash' filter effects.
 
 [http://as3isolib.files.wordpress.com/2009/01/picture-1.png]
