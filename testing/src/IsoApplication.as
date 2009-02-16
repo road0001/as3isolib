@@ -1,47 +1,56 @@
 package
 {	
 	import as3isolib.core.ClassFactory;
+	import as3isolib.core.IsoDisplayObject;
+	import as3isolib.display.IsoSprite;
 	import as3isolib.display.IsoView;
 	import as3isolib.display.primitive.IsoBox;
+	import as3isolib.display.primitive.IsoRectangle;
 	import as3isolib.display.renderers.DefaultViewRenderer;
+	import as3isolib.display.renderers.ViewBoundsRenderer;
 	import as3isolib.display.scene.IsoGrid;
+	import as3isolib.display.scene.IsoHexGrid;
 	import as3isolib.display.scene.IsoScene;
 	import as3isolib.enum.IsoOrientation;
 	import as3isolib.geom.IsoMath;
 	import as3isolib.geom.Pt;
 	import as3isolib.geom.transformations.DefaultIsometricTransformation;
-	import as3isolib.geom.transformations.IsometricTransformation;
 	import as3isolib.graphics.BitmapFill;
+	import as3isolib.graphics.IFill;
+	import as3isolib.graphics.IStroke;
 	import as3isolib.graphics.SolidColorFill;
+	import as3isolib.graphics.Stroke;
+	
+	import br.com.stimuli.loading.BulkLoader;
+	import br.com.stimuli.loading.BulkProgressEvent;
 	
 	import com.gskinner.motion.GTween;
 	
 	import eDpLib.events.ProxyEvent;
 	
 	import flash.display.Bitmap;
-	import flash.display.Loader;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
-	import flash.net.URLRequest;
+	import flash.geom.Matrix;
 	
 	import gs.easing.Cubic;
 	
 	[SWF(frameRate="24", backgroundColor="#666666")] 
 	public class IsoApplication extends Sprite
 	{
-		private var box:IsoBox;
+		private var box:IsoDisplayObject;
 		private var scene:IsoScene;
 		private var g:IsoGrid;
 		private var view:IsoView;
 		
-		private var s:uint = 50;
-		private var numObj:uint = 100;
+		private var s:uint = 25;
+		private var numObj:uint = 50;
 		
-		private var l:Loader
+		private var assetLoader:BulkLoader
 		
 		private var bitmap:Bitmap;
 		
@@ -54,59 +63,101 @@ package
 			//IsoMath.transformationObject = new DimetricTransformation();
 			
 			//load bitmap assets
-			l = new Loader();
-			l.load(new URLRequest("assets/gfx/textures/wood.jpg"));
-			l.contentLoaderInfo.addEventListener(Event.COMPLETE, loader_completeHandler); 	
+			assetLoader = new BulkLoader("assetLoader");
+			assetLoader.add("assets/rsl/assetsManifest.xml", {id:"assetsManifest"});
+			assetLoader.add("assets/rsl/assets.swf", {id:"assetsLib"});
+			assetLoader.add("assets/gfx/textures/stoneFloor.jpg", {id:"stoneFloor"});
+			assetLoader.addEventListener(BulkProgressEvent.COMPLETE, assetLoader_completeHandler);
+			assetLoader.addEventListener(BulkLoader.ERROR, assetsLoader_errorHandler);
+			assetLoader.start();
 		}
 		
-		private function loader_completeHandler (evt:Event):void
+		private function assetsLoader_errorHandler (evt:Event):void
 		{
 			
-			IEventDispatcher(evt.target).removeEventListener(Event.COMPLETE, loader_completeHandler);
+		}
+		
+		private function assetLoader_completeHandler (evt:Event):void
+		{
+			
+			assetLoader.removeEventListener(BulkProgressEvent.COMPLETE, assetLoader_completeHandler);
+			
+			var lib:DisplayObject = assetLoader.getContent("assetsLib");
 			
 			IsoMath.transformationObject = new DefaultIsometricTransformation();
-			IsoMath.transformationObject = new IsometricTransformation();
+			//IsoMath.transformationObject = new IsometricTransformation();
 			
 			//scene
 			scene = new IsoScene();
 			//scene.layoutEnabled = false;
 			
-			g = new IsoGrid();
+			g = new IsoHexGrid();
 			g.id = "grid";
-			g.setGridSize(s, s);
-			//g.gridlines = new Stroke(0, 0xFFFFFF);
-			g.cellSize = 25;
+			g.setGridSize(60, 60);
+			g.gridlines = new Stroke(0, 0x0000FF, 1);
+			g.cellSize = 50;
 			//g.showOrigin = false;
 			g.addEventListener(MouseEvent.CLICK, grid_mouseHandler);
 			//scene.addChild(g);
 			
-			var f0:BitmapFill = new BitmapFill(l, IsoOrientation.XY);
-			var f1:BitmapFill = new BitmapFill(l, IsoOrientation.YZ);
-			var f2:BitmapFill = new BitmapFill(l, IsoOrientation.XZ);  
+			var alphaFill:SolidColorFill = new SolidColorFill(0xFF0000, 0.25);
 			
-			var alphaFill:SolidColorFill = new SolidColorFill(0xFFFFFF, 0.25);
+			var targetObj:IsoBox = new IsoBox();
+			targetObj.id = "mover";
+			targetObj.setSize(50, 50, 30);
 			
-			box = new IsoBox();
-			//box.renderAsOrphan = true
-			box.id = "mover";
-			//box.z = 100;
-			//box.strokes = [new Stroke(5, 0xFFFFFF)];
-			//box.fills = [f0, f1, f2];
-			//box.setSize(50, 100, 75);
-			//box.addEventListener(MouseEvent.ROLL_OVER, function (e:Event):void { box.container.filters = [new GlowFilter(0xFFFFFF, 0.5, 15, 15,10)]; });
-			//box.addEventListener(MouseEvent.ROLL_OUT, function (e:Event):void { box.container.filters = []; });
+			//assetLoader.x = -50;
+			//assetLoader.y = -1 * assetLoader.height + 50;
 			
+			box = targetObj;
 			scene.addChild(box);
 			
-			var randomBox:IsoBox;
+			var stone:IFill = new BitmapFill(assetLoader.getContent("stoneFloor"), IsoOrientation.XY, new Matrix(1.25, 0, 0, 1.25), null, false);
+			var blankStroke:IStroke = new Stroke(0, 0, 0);
+			
+			var s2:IsoScene = new IsoScene();
+			s2.layoutEnabled = false;
+			
+			var tileSize:Number = 500;
+			
 			var i:uint;
+			var j:uint;
+			var m:uint = Math.floor(g.gridSize[0] * g.cellSize / tileSize);
+			while (j < m)
+			{
+				i = 0;
+				while (i < m)
+				{
+					var tile:IsoRectangle = new IsoRectangle();
+					tile.setSize(tileSize, tileSize, 0);
+					tile.moveTo(i * tileSize, j * tileSize, 0);
+					tile.fills = [stone];
+					tile.strokes = [blankStroke];
+					
+					s2.addChild(tile);
+					
+					i++;
+				}
+				
+				j++;
+			}
+			
+			s2.render();
+			
+			var skinClass:Class;
+			skinClass = lib.loaderInfo.applicationDomain.getDefinition("Alter000") as Class;
+				
+			var randomBox:IsoSprite;
+			i = 0;
 			while (i < numObj)
 			{
-				randomBox = new IsoBox();
+				randomBox = new IsoSprite();
 				//randomBox.renderAsOrphan = true;
-				randomBox.setSize(25, 25, 10 + Math.random() * 40);
+				randomBox.setSize(g.cellSize, g.cellSize, 0);
 				//randomBox.edges = [];
-				//randomBox.fills = [alphaFill];
+				randomBox.sprites = [skinClass];
+				randomBox.container.mouseChildren = false;
+				//randomBox.
 				
 				var rX:Number = Math.random() * s * g.cellSize;
 				var rY:Number = Math.random() * s * g.cellSize;
@@ -121,12 +172,17 @@ package
 				i++;
 			}
 			
+			var f:ClassFactory = new ClassFactory(DefaultViewRenderer);
+			f.properties = {};
+			f.properties.scenes = [scene];
+			
 			view = new IsoView();
 			view.clipContent = false;
-			view.viewRenderers = [new ClassFactory(DefaultViewRenderer)];//, new ClassFactory(ViewBoundsRenderer)];
+			view.viewRenderers = [f, new ClassFactory(ViewBoundsRenderer)];
 			view.x = 100
 			view.y = 50;
 			view.setSize(800, 250);
+			//view.zoom(0.75);
 			//view.addScene(scene);
 			
 			bitmap = new Bitmap();
@@ -138,10 +194,11 @@ package
 			//scene.styleRenderers = [factory2];
 			//scene.hostContainer = new Sprite(); //orphan the scene.container from the display list
 			
-			var s2:IsoScene = new IsoScene();
-			s2.addChild(g);
-			s2.render();
+			var gridScene:IsoScene = new IsoScene();
+			gridScene.addChild(g);
+			
 			view.addScene(s2);
+			view.addScene(gridScene);
 			view.addScene(scene);
 			
 			view.render(true);

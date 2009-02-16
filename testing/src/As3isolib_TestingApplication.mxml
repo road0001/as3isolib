@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application backgroundGradientColors="{[0xFFFFFF, 0x999999]}"
+	xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:controller="as3isolibTestingApp.controller.*" xmlns:view="as3isolibTestingApp.view.*">
+	
+	<mx:Script source="application_include.as"/>
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import as3isolibTestingApp.view.mediators.ApplicationMediator;			
+			
+			private var mediators:Array = getMediators();
+			private function getMediators ():Array
+			{
+				var a:Array = [];
+				a.push(new ApplicationMediator(this));
+				
+				return a;
+			}
+			
+		]]>
+	</mx:Script>
+		
+	<mx:Panel title="as3isolib testing application" width="100%" height="100%" layout="horizontal">
+		
+		<view:IsoViewContainer id="isoViewContainer" width="100%" height="100%"/>
+		
+	</mx:Panel>
+	
+	<controller:Controller id="controller"/>
+	
+</mx:Application>
