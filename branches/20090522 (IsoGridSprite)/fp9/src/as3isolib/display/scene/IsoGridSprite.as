@@ -79,7 +79,7 @@
 			if (cSize != value)
 			{
 				cSize = value;
-				invalidateSize();
+				invalidateSprites();
 			}
 		}
 		
@@ -110,11 +110,11 @@
 		 */
 		override public function invalidateSize():void 
 		{
+			invalidateSprites();
 			super.invalidateSize();
-			redraw();
 		}
 		
-		private function redraw():void
+		override protected function renderSprites():void 
 		{
 			var g:Graphics = gfx.graphics;
 			g.clear();
@@ -151,6 +151,8 @@
 			draw(g.lineTo, 0, length);
 			draw(g.lineTo, 0, 0);
 			g.endFill();
+
+			super.renderSprites();
 		}
 	}
 	
