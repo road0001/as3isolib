@@ -10,8 +10,10 @@ IsoView.render()
   * viewRenderers - _iterate through the viewRenderers array and execute IViewRenderer.renderView()_
   * scenes - _if rendering recursively, iterate through the scenes array and execute IIsoScene.render()_
 
-IsoScene.render()
-  * children - _if recursively rendering the scene, iterate through each child and call child.render()_
-  * layoutRenderer - _arrange child objects based on 3D isometric position_
-  * styleRenderers - _iterate through the styleRenderers array and execute ISceneRenderer.renderScene()_
-  * sceneRendered() - _performs any last minute cleanup before exiting the rendering phase_
+IsoScene.render() - this consists of three phases: preRenderLogic, renderLogic, postRenderLogic
+  * preRenderLogic() - _as the name implies, this performs any logic during each render phase before processing child objects.  At this point, the scene dispatches an IsoEvent of the type IsoEvent.RENDER.  Developers can listen for this event with the expectations that they can perform some additional logic before rendering of child objects takes place._
+  * renderLogic() - _this is the core rendering phase that deals with child objects, layoutRenderers and styleRenderers._
+    * children - _if recursively rendering the scene, iterate through each child and call child.render()_
+    * layoutRenderer - _arrange child objects based on 3D isometric position_
+    * styleRenderers - _iterate through the styleRenderers array and execute ISceneRenderer.renderScene()_
+  * postRenderLogic - _performs any last minute cleanup before dispatching IsoEvent.RENDER_COMPLETE.  Also calls the deprecated method sceneRendered._
