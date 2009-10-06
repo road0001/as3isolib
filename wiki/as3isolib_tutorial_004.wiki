@@ -46,9 +46,7 @@ package
 		private function buildScene ():void
 		{
 			scene = new IsoScene();
-			scene.hostContainer = this;
-			scene.container.x = 200;
-			scene.container.y = 200;
+			scene.hostContainer = this; //it is recommended to use an IsoView
 			
 			var treeTrunkClass:Class = loader.contentLoaderInfo.applicationDomain.getDefinition("TreeTrunk") as Class;
 			var treeLeavesClass:Class = loader.contentLoaderInfo.applicationDomain.getDefinition("TreeLeaves") as Class;
