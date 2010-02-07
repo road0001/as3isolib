@@ -1,4 +1,4 @@
-#summary How to get isometric coordinates of clicked IsoSprites
+#summary How to get X and Y isometric coordinates of clicked IsoSprites
 #labels tutorial
 
 = Introduction =
