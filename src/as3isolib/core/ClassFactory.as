@@ -11,12 +11,9 @@
 package as3isolib.core
 {
 	import mx.core.ClassFactory;
+	import mx.core.IMXMLObject;
 	
-	[Deprecated(replacement="mx.core.ClassFactory")]
 	/**
-	 * This class is now deprecated.  This is an exact duplicate of mx.core.ClassFactory located in the Flex SDK by Adobe.
-	 * Developers are incouraged to use the mx.core.ClassFactory instead.
-	 * 
 	 *  A ClassFactory instance is a "factory object" which Flex uses
 	 *  to generate instances of another class, each with identical properties.
 	 *
@@ -36,12 +33,26 @@ package as3isolib.core
 	 *  Therefore it lets you create objects that can be assigned to properties 
 	 *  of type IFactory.</p>
 	 */
-	public class ClassFactory extends mx.core.ClassFactory
+	public class ClassFactory extends mx.core.ClassFactory implements IMXMLObject
 	{
-		
+		/**
+		 * Constructor
+		 */
 		public function ClassFactory (generator:Class = null)
 		{
 			super(generator);
+		}
+		
+		public var document:Object;
+		public var id:String;
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function initialized (document:Object, id:String):void
+		{
+			this.document = document;
+			this.id = id;
 		}
 	}
 }
