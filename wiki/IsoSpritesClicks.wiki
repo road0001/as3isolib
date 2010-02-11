@@ -42,3 +42,9 @@ pt.y++;
 }
 }}}
   # That's it. Now pt is the "floor" of the isometric object in its clicked position. Note that the only flaw here is that you can't know your Z value of the click.
+  # EDIT: If your MovieClip is made out of many other MovieClips, and you get your localX and Y relative to some internal MovieClip, instead of calculating offsets, I did this little trick when the click event happened (m_view is the IsoView, and it's assuming your view takes up the entire stage area). After that you perform the loop in step 6:
+{{{
+var p:Point = new Point(evt.localX, evt.localY);
+p = evt.target.localToGlobal(p);				
+var pt:Pt = m_view.localToIso(p);
+}}}
