@@ -10,6 +10,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 package as3isolib.core
 {
+	import flash.events.IEventDispatcher;
+	
 	import mx.core.ClassFactory;
 	import mx.core.IMXMLObject;
 	
@@ -37,13 +39,29 @@ package as3isolib.core
 	{
 		/**
 		 * Constructor
+		 * 
+		 * @param generator The class reference used to instantiate a new instance.
 		 */
 		public function ClassFactory (generator:Class = null)
 		{
 			super(generator);
 		}
 		
+		[Inspectable(environment="Flash")]
+		[ArrayElementType("as3isolib.core.EventListenerDescriptor")]
+		/**
+		 * A collection of event listener descriptors used to assign eventListeners to each instance created by <code>newInstance()</code>.
+		 */
+		public var eventListenerDescriptors:Array;
+		
+		/**
+		 * The MXML document that created this object.
+		 */
 		public var document:Object;
+		
+		/**
+		 * The identifier used by <code>document</code> to refer to this object. If the object is a deep property on <code>document</code>, <code>id</code> is null.
+		 */
 		public var id:String;
 		
 		/**
@@ -53,6 +71,22 @@ package as3isolib.core
 		{
 			this.document = document;
 			this.id = id;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function newInstance ():*
+		{
+			var instance:* = super.newInstance();
+			if (instance is IEventDispatcher)
+			{
+				var descriptor:EventListenerDescriptor;
+				for each (descriptor in eventListenerDescriptors)
+					IEventDispatcher(instance).addEventListener(descriptor.type, descriptor.listener, descriptor.useCapture, descriptor.priority, descriptor.useWeakReference);
+			}
+			
+			return instance;
 		}
 	}
 }
