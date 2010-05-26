@@ -118,19 +118,16 @@ package as3isolib.core
 			{
 				super.addChildAt( child, index );
 				
-				if ( IIsoContainer( child ).includeInLayout )
-				{
-					displayListChildrenArray.push( child );
-					if ( index > mainContainer.numChildren )
-						index = mainContainer.numChildren;
-					
-					//referencing explicit removal of child RTE - http://life.neophi.com/danielr/2007/06/rangeerror_error_2006_the_supp.html
-					var p:DisplayObjectContainer = IIsoContainer( child ).container.parent;
-					if ( p && p != mainContainer )
-						p.removeChild( IIsoContainer( child ).container );
-					
-					mainContainer.addChildAt( IIsoContainer( child ).container, index );
-				}
+				displayListChildrenArray.push( child );
+				if ( index > mainContainer.numChildren )
+					index = mainContainer.numChildren;
+				
+				//referencing explicit removal of child RTE - http://life.neophi.com/danielr/2007/06/rangeerror_error_2006_the_supp.html
+				var p:DisplayObjectContainer = IIsoContainer( child ).container.parent;
+				if ( p && p != mainContainer )
+					p.removeChild( IIsoContainer( child ).container );
+				
+				mainContainer.addChildAt( IIsoContainer( child ).container, index );
 			}
 			
 			else
@@ -167,7 +164,7 @@ package as3isolib.core
 		override public function removeChildByID( id:String ):INode
 		{
 			var child:IIsoContainer = IIsoContainer( super.removeChildByID( id ) );
-			if ( child && child.includeInLayout )
+			if ( child )
 			{
 				var i:int = displayListChildrenArray.indexOf( child );
 				if ( i > -1 )
@@ -186,10 +183,7 @@ package as3isolib.core
 		{
 			var child:IIsoContainer;
 			for each ( child in children )
-			{
-				if ( child.includeInLayout )
-					mainContainer.removeChild( child.container );
-			}
+				mainContainer.removeChild( child.container );
 			
 			displayListChildrenArray = new Vector.<IIsoContainer>();
 			
