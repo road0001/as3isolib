@@ -38,7 +38,7 @@ package
 			
 			var view:IsoView = new IsoView();
 			view.setSize(150, 100);
-			view.scene = scene; //look in the future to be able to add more scenes
+			view.addScene(scene);
 			
 			addChild(view);
 		}
