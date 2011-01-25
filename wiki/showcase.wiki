@@ -6,6 +6,17 @@ This is a facebook game which you can check out here - [http://apps.facebook.com
 http://as3isolib.files.wordpress.com/2011/01/screenshot_01.jpg
 http://as3isolib.files.wordpress.com/2011/01/screenshot_09.jpg
 
+===Down Town (Facebook game)===
+Dion @ Three Rings Design posted on the User Forum that they just released an update to their Facebook game called Downtown that utilizes the as3isolib in their interior scenes.  Go check it out – [http://apps.facebook.com/downtowngame/]
+
+http://as3isolib.files.wordpress.com/2010/02/picture-11.png
+http://as3isolib.files.wordpress.com/2010/02/picture-2.png
+
+===Kingdom's Nobility===
+The guys over at Blue Omega have really outdone themselves w/ pushing this out as a release candidate (I think, guys correct me if I am wrong).  Great work & great game!!!!
+
+<wiki:video url="http://www.youtube.com/watch?v=vEN7oXcimRQ"/>
+
 ===OLD beta release demo screenshots===
 This is a screenshot of a small demo game currently in development to showcase some of the features of the as3isolib.  It will feature variable height terrain, basic pathfinding, a flare-based GUI and some advanced visual effects utilizing Flash' filter effects.
 
