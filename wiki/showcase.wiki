@@ -1,5 +1,13 @@
 #summary Showcase of projects using the as3isolib
 
+===Dumb Knight===
+Play the game here - [http://dumbknight.com]
+
+http://s12.postimg.org/8hbtowowd/screen_Shot4.png
+http://s12.postimg.org/cp6lxnqbx/screen_Shot3.png
+http://s12.postimg.org/49lmtwcul/screen_Shot2.png
+
+
 ===Zex Lex Duel===
 This is a facebook game which you can check out here - [http://apps.facebook.com/cp_zexlexduel/]
 
